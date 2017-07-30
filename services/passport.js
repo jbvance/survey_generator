@@ -23,24 +23,24 @@ passport.deserializeUser((id, done) => {
 });
 
 passport.use(
-    new GoogleStrategy({
-        clientID: keys.googleClientID,
-        clientSecret: keys.googleClientSecret,
-        callbackURL: '/auth/google/callback',
-        proxy: true
-    }, (accessToken, refreshToken, profile, done) => {
-        User.findOne({ googleId: profile.id })
-            .then((existingUser) => {
-                if (existingUser) {
-                    //user already exists with given profile id
-                    // call done - first arg is err, second arg is user record
-                    done(null, existingUser);
-                } else {
-                    //No user id, create one now
-                    new User({ googleId: profile.id })
-                    .save()
-                    .then(user => done(null, user));
-                }
-            })
-    })
+  new GoogleStrategy(
+    {
+      clientID: keys.googleClientID,
+      clientSecret: keys.googleClientSecret,
+      callbackURL: '/auth/google/callback',
+      proxy: true
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      const existingUser = await User.findOne({ googleId: profile.id });
+
+      if (existingUser) {
+        // we already have a record with the given profile id
+        return done(null, existingUser);
+      }
+
+      // we don't have a user record with this ID, make a new record
+      const user = await new User({ googleId: profile.id }).save();
+      done(null, user);
+    }
+  )
 );

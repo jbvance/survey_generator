@@ -14,7 +14,7 @@ app.use(
     cookieSession({
         maxAge: 30 * 24 * 60 * 60 * 1000, //thirty days
         keys: [keys.cookieKey],
-    })    
+    })
 );
 
 //tell passport it should use cookies to handle authentication
@@ -24,9 +24,7 @@ app.use(passport.session());
 
 require('./routes/authRoutes')(app);
 
-
-const PORT = process.env.NODE_ENV === 'production' ? process.env.PORT || 8080 : 8081;
-//const PORT = process.env.PORT || 8081;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT);
 
 console.log("app listening on PORT ", PORT);
