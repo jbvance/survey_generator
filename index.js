@@ -25,7 +25,8 @@ app.use(passport.session());
 require('./routes/authRoutes')(app);
 
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.NODE_ENV === 'production' ? process.env.PORT || 8080 : 8081;
+//const PORT = process.env.PORT || 8081;
 app.listen(PORT);
 
 console.log("app listening on PORT ", PORT);
