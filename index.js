@@ -28,7 +28,7 @@ require('./routes/billingRoutes')(app);
 
 // Only run this in production. In dev, create-react-app
 // server handles the react routing stuff
-if (proccess.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assets
   // like our main.js file, or main.css file
   // If any get request comes in for a route, file, or anything,
