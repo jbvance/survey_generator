@@ -9,6 +9,12 @@ import reduxThunk from 'redux-thunk';
 import App from './components/App';
 import reducers from './reducers';
 
+// You can use the below text to test api routes in the browser without
+// having to write the react components first, but DO NOT LEAVE IN
+// FOR PRODUCTION
+//import axios from 'axios';
+//window.axios = axios;
+
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 ReactDOM.render(
