@@ -47,7 +47,7 @@ function validate(values) {
   // Provide an empty string in case no values are passed in because
   // the form validation runs as soon as the form is loaded and there are
   //  no emails at that point
-  errors.emails = validateEmails(values.emails || '');
+  errors.recipients = validateEmails(values.recipients || '');
 
   _.each(formFields, ({ name, noValueError }) => {
     if (!values[name]) {
